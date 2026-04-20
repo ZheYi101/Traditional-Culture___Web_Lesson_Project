@@ -53,16 +53,21 @@
 - 移动端宽度下布局不溢出。
 
 ## 7. 模块索引
+- `src/components/TopBar.js`：顶栏组件（左侧页面切换、右侧主题切换）。
 - `src/components/ThemeSwitcher.js`：主题状态、切换组件与持久化。
+- `src/pages/home/index.js`：首页页面模块（模板与页面初始化）。
 - `src/pages/home/components/SolarTermsSection.js`：首页节气卡片区。
 - `src/pages/home/components/DivinationSection.js`：首页占卜交互区与哈希取模逻辑。
 - `src/pages/home/constants/solarTerms.js`：首页节气静态数据。
 - `src/pages/home/constants/divinations.js`：首页占卜签文静态数据。
+- `src/pages/play/index.js`：示例小游戏页面模块（模板与页面初始化）。
+- `src/styles/components/top-bar.css`：顶栏组件样式。
 - `src/styles/components/theme-switcher.css`：主题切换组件样式。
 - `src/styles/components/section-title.css`：标题组件样式。
 - `src/styles/components/solar-term-card.css`：节气卡片组件样式。
 - `src/styles/pages/home.css`：首页布局样式。
 - `src/styles/pages/home-divination.css`：首页占卜区样式。
+- `src/styles/pages/play.css`：小游戏示例页样式。
 
 ## 8. 执行记录
 
@@ -155,3 +160,30 @@
 - 验证：待执行（建议按 README 规则自检当前目录结构与入口流程）。
 - 风险与待办：
 	- 若后续新增页面，请同步更新两份文档，避免描述漂移。
+
+### 2026-04-20 / Copilot
+- 目标：新增顶栏组件，实现左侧页面切换与右侧主题切换。
+- 修改文件：
+	- `src/components/TopBar.js`（新增）
+	- `src/pages/home/home.js`
+	- `src/styles/components/top-bar.css`（新增）
+	- `index.html`
+	- `AGENTS.md`
+- 验证：待执行（建议本地点击“首页/小游戏”切换并验证主题切换可用）。
+- 风险与待办：
+	- 当前页面切换基于锚点定位，后续多页面时可升级为简易路由。
+
+### 2026-04-20 / Copilot
+- 目标：将顶栏切换升级为“页面级路由切换”，并新增示例页面，且顶栏固定在顶部。
+- 修改文件：
+	- `src/main.js`
+	- `src/components/TopBar.js`
+	- `src/pages/home/index.js`
+	- `src/pages/play/index.js`（新增）
+	- `src/styles/components/top-bar.css`
+	- `src/styles/pages/play.css`（新增）
+	- `index.html`
+	- `AGENTS.md`
+- 验证：待执行（建议本地切换 `#/home` 与 `#/play` 并检查顶栏是否始终置顶）。
+- 风险与待办：
+	- 当前为 hash 路由，后续可按需要扩展为 history 路由。

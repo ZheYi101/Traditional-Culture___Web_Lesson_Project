@@ -1,0 +1,18 @@
+.play-hero,
+.play-board {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-soft);
+}
+
+.play-title {
+  color: var(--color-primary);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom: var(--space-2);
+}
+
+.play-desc {
+  color: var(--color-text-muted);
+}
