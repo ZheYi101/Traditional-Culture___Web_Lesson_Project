@@ -24,30 +24,54 @@ export function initTheme() {
     setTheme(getTheme());
 }
 
-export function ThemeSwitcher() {
-    const options = Object.entries(THEMES)
-        .map(([value, label]) => `<option value="${value}">${label}</option>`)
-        .join("");
-
-    return `
-    <label class="theme-switcher">
-      <span>主题</span>
-      <select class="select-theme" id="theme-select" aria-label="切换主题">
-        ${options}
-      </select>
-    </label>
-  `;
-}
-
-export function bindThemeSwitcher() {
-    const select = document.querySelector("#theme-select");
-
-    if (!select) {
-        return;
+class TcThemeSwitcher extends HTMLElement {
+    constructor() {
+        super();
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    select.value = getTheme();
-    select.addEventListener("change", (event) => {
+    connectedCallback() {
+        this.render();
+        const select = this.querySelector(".select-theme");
+
+        if (!select) {
+            return;
+        }
+
+        select.value = getTheme();
+        select.addEventListener("change", this.handleChange);
+    }
+
+    disconnectedCallback() {
+        const select = this.querySelector(".select-theme");
+
+        if (!select) {
+            return;
+        }
+
+        select.removeEventListener("change", this.handleChange);
+    }
+
+    handleChange(event) {
         setTheme(event.target.value);
-    });
+    }
+
+    render() {
+        const options = Object.entries(THEMES)
+            .map(([value, label]) => `<option value="${value}">${label}</option>`)
+            .join("");
+
+        this.innerHTML = `
+      <label class="theme-switcher">
+        <span>主题</span>
+        <select class="select-theme" aria-label="切换主题">
+          ${options}
+        </select>
+      </label>
+    `;
+    }
+}
+
+if (!customElements.get("tc-theme-switcher")) {
+    customElements.define("tc-theme-switcher", TcThemeSwitcher);
 }
