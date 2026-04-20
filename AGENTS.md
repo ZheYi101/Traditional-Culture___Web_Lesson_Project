@@ -7,7 +7,7 @@
 ## 2. 技术边界
 - 禁止引入 npm 包和构建工具。
 - 运行方式：直接打开 `index.html` 或使用任意静态文件服务。
-- 组件模式：函数组件（返回模板字符串）+ 挂载后绑定事件。
+- 组件模式：Web Components（Custom Elements）+ 生命周期管理事件。
 
 ## 2.1 命名规范
 - JS 标识符默认小驼峰（例如：`pageName`）。
@@ -37,10 +37,10 @@
 - 每次 agent 执行后必须追加“执行记录”。
 
 ## 5.1 页面初始化规范
-- 每个页面模块必须导出 `initXxxPage` 函数（例如：`initHomePage`）。
-- 页面内所有事件绑定与页面专用初始化逻辑统一放在 `initXxxPage` 内执行。
-- `main.js` 只负责三件事：渲染页面模板、调用 `initXxxPage`、执行少量全局初始化。
-- 禁止在 `main.js` 直接调用页面内部的 `bind*` 函数，避免入口文件膨胀。
+- 每个页面模块必须定义页面级自定义元素（例如：`tc-home-page`）。
+- 页面内所有事件绑定与清理统一放在组件生命周期：`connectedCallback` / `disconnectedCallback`。
+- `main.js` 只负责三件事：加载组件模块注册、根据路由挂载页面标签、执行少量全局初始化。
+- 禁止在 `main.js` 直接处理页面内部交互事件，避免入口文件膨胀。
 
 ## 5.2 数据归属规范
 - 页面专用静态数据必须放在 `src/pages/<page>/constants`。
@@ -53,14 +53,16 @@
 - 移动端宽度下布局不溢出。
 
 ## 7. 模块索引
-- `src/components/TopBar.js`：顶栏组件（左侧页面切换、右侧主题切换）。
-- `src/components/ThemeSwitcher.js`：主题状态、切换组件与持久化。
-- `src/pages/home/index.js`：首页页面模块（模板与页面初始化）。
-- `src/pages/home/components/SolarTermsSection.js`：首页节气卡片区。
-- `src/pages/home/components/DivinationSection.js`：首页占卜交互区与哈希取模逻辑。
+- `src/components/TopBar.js`：顶栏自定义元素 `tc-top-bar`（左侧页面切换、右侧主题切换）。
+- `src/components/ThemeSwitcher.js`：主题切换自定义元素 `tc-theme-switcher` 与主题持久化。
+- `src/components/SectionTitle.js`：标题自定义元素 `tc-section-title`。
+- `src/components/SolarTermCard.js`：节气卡片自定义元素 `tc-solar-term-card`。
+- `src/pages/home/index.js`：首页页面级自定义元素 `tc-home-page`。
+- `src/pages/home/components/SolarTermsSection.js`：首页节气区自定义元素 `tc-solar-terms-section`。
+- `src/pages/home/components/DivinationSection.js`：首页占卜区自定义元素 `tc-divination-section` 与哈希取模逻辑。
 - `src/pages/home/constants/solarTerms.js`：首页节气静态数据。
 - `src/pages/home/constants/divinations.js`：首页占卜签文静态数据。
-- `src/pages/play/index.js`：示例小游戏页面模块（模板与页面初始化）。
+- `src/pages/play/index.js`：示例小游戏页面级自定义元素 `tc-play-page`。
 - `src/styles/components/top-bar.css`：顶栏组件样式。
 - `src/styles/components/theme-switcher.css`：主题切换组件样式。
 - `src/styles/components/section-title.css`：标题组件样式。
@@ -187,3 +189,38 @@
 - 验证：待执行（建议本地切换 `#/home` 与 `#/play` 并检查顶栏是否始终置顶）。
 - 风险与待办：
 	- 当前为 hash 路由，后续可按需要扩展为 history 路由。
+
+### 2026-04-20 / Copilot
+- 目标：将函数组件架构全量迁移为 Web Components（Custom Elements）。
+- 修改文件：
+	- `src/main.js`
+	- `src/components/TopBar.js`
+	- `src/components/ThemeSwitcher.js`
+	- `src/components/SectionTitle.js`
+	- `src/components/SolarTermCard.js`
+	- `src/pages/home/index.js`
+	- `src/pages/home/home.js`
+	- `src/pages/home/components/SolarTermsSection.js`
+	- `src/pages/home/components/DivinationSection.js`
+	- `src/pages/play/index.js`
+	- `AGENTS.md`
+- 验证：待执行（建议本地刷新页面后检查首页/小游戏切换、主题切换与占卜交互）。
+- 风险与待办：
+	- 当前仍沿用全局 CSS；后续若出现样式冲突，可逐步升级到 Shadow DOM 样式隔离。
+
+### 2026-04-20 / Copilot
+- 目标：消除 JS 中的 HTML 模板字符串，统一改为 DOM API 渲染。
+- 修改文件：
+	- `src/main.js`
+	- `src/components/TopBar.js`
+	- `src/components/ThemeSwitcher.js`
+	- `src/components/SectionTitle.js`
+	- `src/components/SolarTermCard.js`
+	- `src/pages/home/index.js`
+	- `src/pages/home/components/SolarTermsSection.js`
+	- `src/pages/home/components/DivinationSection.js`
+	- `src/pages/play/index.js`
+	- `AGENTS.md`
+- 验证：已执行静态错误检查，相关 JS 文件均无报错。
+- 风险与待办：
+	- 仍建议在浏览器手动验证首页与小游戏页切换、主题切换、占卜结果展示。

@@ -1,17 +1,11 @@
 import { initTheme } from "./components/ThemeSwitcher.js";
-import { initHomePage, HomePage } from "./pages/home/index.js";
-import { bindTopBar, TopBar } from "./components/TopBar.js";
-import { initPlayPage, PlayPage } from "./pages/play/index.js";
+import "./components/TopBar.js";
+import { homePageTag } from "./pages/home/index.js";
+import { playPageTag } from "./pages/play/index.js";
 
 const pageRegistry = {
-    home: {
-        render: HomePage,
-        init: initHomePage
-    },
-    play: {
-        render: PlayPage,
-        init: initPlayPage
-    }
+    home: homePageTag,
+    play: playPageTag
 };
 
 function getCurrentPageKey() {
@@ -27,15 +21,12 @@ function mountApp() {
     }
 
     const pageKey = getCurrentPageKey();
-    const page = pageRegistry[pageKey];
+    const pageTag = pageRegistry[pageKey];
 
     app.innerHTML = `
-      ${TopBar(pageKey)}
-      <main id="page-root">${page.render()}</main>
+            <tc-top-bar current-page="${pageKey}"></tc-top-bar>
+            <main id="page-root"><${pageTag}></${pageTag}></main>
     `;
-
-    bindTopBar();
-    page.init();
 }
 
 initTheme();
