@@ -61,9 +61,18 @@
 - `src/pages/home/components/SolarTermsSection.js`：首页节气区自定义元素 `tc-solar-terms-section`。
 - `src/pages/home/components/DivinationSection.js`：首页占卜区自定义元素 `tc-divination-section` 与哈希取模逻辑。
 - `src/pages/home/constants/solarTerms.js`：首页节气静态数据。
-- `src/pages/home/constants/divinations.js`：首页占卜签文静态数据。
 - `src/pages/play/index.js`：示例小游戏页面级自定义元素 `tc-play-page`。
 - `src/pages/advisor/index.js`：出行问策页面级自定义元素 `tc-advisor-page`，负责对话 UI 与流式响应渲染。
+- `src/pages/pageRegistry.js`：页面注册表，统一维护 hash 路由与页面标签映射。
+- `src/constants/divinationProfiles.js`：占卜与今日运势共用的签文区间配置。
+- `src/constants/fortuneProfiles.js`：生辰八字共用静态映射数据。
+- `src/pages/fortune/index.js`：生辰八字页面级自定义元素 `tc-fortune-page`。
+- `src/components/ResultBadge.js`：结果标签自定义元素 `tc-result-badge`。
+- `src/service/hash.js`：稳定哈希与区间映射工具。
+- `src/service/divinationService.js`：占卜结果生成逻辑。
+- `src/service/fortuneService.js`：生辰八字模拟结果生成逻辑。
+- `src/styles/components/result-badge.css`：结果标签组件样式。
+- `src/styles/pages/fortune.css`：生辰八字页面样式。
 - `src/services/travelAdvisorApi.js`：出行问策 SSE 流式接口客户端。
 - `src/styles/components/top-bar.css`：顶栏组件样式。
 - `src/styles/components/theme-switcher.css`：主题切换组件样式。
@@ -291,3 +300,65 @@
 - 验证：已执行前端 JS `node --check`、`go test ./...`；使用本地服务验证自然语言请求“我在上海，明天上午想去杭州西湖走走...”可解析为杭州与明天日期，且 SSE 上下文包含 `currentTime`、`currentDate`、`timezone`。
 - 风险与待办：
 	- 使用真实硅基流动模型返回结果仍需配置有效 `SILICONFLOW_API_KEY`。
+
+
+### 2026-04-23 / Codex
+- 目标：在保留首页、小游戏与出行问策功能的前提下，新增“占卜”和“算命（生辰八字）”两个独立页面，并接入现有 hash 路由与主题体系。
+- 修改文件：
+	- `src/main.js`
+	- `src/components/TopBar.js`
+	- `src/components/ResultBadge.js`（新增）
+	- `src/pages/pageRegistry.js`（新增）
+	- `src/pages/divination/index.js`（新增）
+	- `src/pages/fortune/index.js`（新增）
+	- `src/pages/fortune/constants/fortuneProfiles.js`（新增）
+	- `src/constants/divinationProfiles.js`（新增）
+	- `src/service/hash.js`（新增）
+	- `src/service/divinationService.js`（新增）
+	- `src/service/fortuneService.js`（新增）
+	- `src/styles/components/result-badge.css`（新增）
+	- `src/styles/pages/fortune.css`（新增）
+	- `index.html`
+- 验证：待执行（当前环境缺少 `node`，建议本地打开 `index.html` 手动验证 `#/home`、`#/divination`、`#/fortune`、`#/play`、`#/advisor`）。
+- 风险与待办：
+	- 生辰八字当前为稳定映射模拟结果，后续如需真实排盘可在 `src/service/fortuneService.js` 替换算法实现。
+
+### 2026-04-23 / Codex
+- 目标：消除首页占卜与独立占卜页的功能重复，保留首页“今日运势”并改为无需输入的自动生成模式。
+- 修改文件：
+	- `src/pages/home/components/DivinationSection.js`
+	- `src/styles/pages/home-divination.css`
+	- `src/pages/home/index.js`
+	- `src/service/divinationService.js`
+	- `src/components/TopBar.js`
+	- `src/pages/pageRegistry.js`
+	- `AGENTS.md`
+- 验证：待执行（建议本地打开首页确认无需输入即可展示当日运势，并检查顶部导航已移除重复的“占卜”入口）。
+- 风险与待办：
+	- 若后续需要恢复独立占卜页，可基于共享的 `src/constants/divinationProfiles.js` 与 `src/service/divinationService.js` 重新接入。
+
+### 2026-04-23 / Codex
+- 目标：确认删除未接入主路由的独立占卜页及其样式引用，同时保留首页今日运势所需的共享占卜配置。
+- 修改文件：
+	- `src/constants/divinationProfiles.js`（新增）
+	- `src/service/divinationService.js`
+	- `index.html`
+	- `AGENTS.md`
+	- `src/pages/divination/index.js`（删除）
+	- `src/pages/divination/constants/divinationProfiles.js`（删除）
+	- `src/styles/pages/divination.css`（删除）
+- 验证：待执行（建议本地刷新 `#/home` 与 `#/fortune`，确认首页今日运势正常、页面样式无多余引用）。
+- 风险与待办：
+	- 当前环境未提供运行时校验工具，删除后的资源引用仅完成源码级检查。
+
+### 2026-04-23 / Codex
+- 目标：清理结构层残留耦合与死文件，将八字静态配置提升到共享常量层并移除首页废弃签文数据。
+- 修改文件：
+	- `src/constants/fortuneProfiles.js`（新增）
+	- `src/service/fortuneService.js`
+	- `src/pages/home/constants/divinations.js`（删除）
+	- `src/pages/fortune/constants/fortuneProfiles.js`（删除）
+	- `AGENTS.md`
+- 验证：待执行（建议本地打开 `#/home` 与 `#/fortune`，确认首页今日运势和八字结果生成正常）。
+- 风险与待办：
+	- 当前环境未提供运行时校验工具，本次调整仅完成源码级检查。

@@ -1,14 +1,6 @@
 import { initTheme } from "./components/ThemeSwitcher.js";
 import "./components/TopBar.js";
-import { homePageTag } from "./pages/home/index.js";
-import { playPageTag } from "./pages/play/index.js";
-import { advisorPageTag } from "./pages/advisor/index.js";
-
-const pageRegistry = {
-    home: homePageTag,
-    play: playPageTag,
-    advisor: advisorPageTag
-};
+import { pageRegistry } from "./pages/pageRegistry.js";
 
 function getCurrentPageKey() {
     const rawHash = window.location.hash.replace(/^#\/?/, "");
@@ -23,7 +15,9 @@ function mountApp() {
     }
 
     const pageKey = getCurrentPageKey();
-    const pageTag = pageRegistry[pageKey];
+    const pageItem = pageRegistry[pageKey];
+    const pageTag = pageItem.pageTag;
+    const initPage = pageItem.initPage;
     const topBar = document.createElement("tc-top-bar");
     const pageRoot = document.createElement("main");
     const pageElement = document.createElement(pageTag);
@@ -32,6 +26,8 @@ function mountApp() {
     pageRoot.id = "page-root";
     pageRoot.append(pageElement);
     app.replaceChildren(topBar, pageRoot);
+
+    initPage?.(pageElement);
 }
 
 initTheme();

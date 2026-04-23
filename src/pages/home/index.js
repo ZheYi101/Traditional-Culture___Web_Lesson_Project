@@ -12,7 +12,7 @@ class TcHomePage extends HTMLElement {
       <header class="page-header">
         <div class="brand">
           <h1>节气灵签</h1>
-          <p>传统文化卡片 + 哈希占卜 + 轻量小游戏入口</p>
+          <p>传统文化卡片 + 今日运势 + 轻量小游戏入口</p>
         </div>
       </header>
       <tc-solar-terms-section></tc-solar-terms-section>

@@ -1,0 +1,41 @@
+.result-badge {
+  --result-badge-bg: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface));
+  --result-badge-text: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--result-badge-bg);
+  color: var(--result-badge-text);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.result-badge-大吉 {
+  --result-badge-bg: color-mix(in srgb, var(--color-success) 18%, var(--color-surface));
+  --result-badge-text: var(--color-success);
+}
+
+.result-badge-中吉,
+.result-badge-formal {
+  --result-badge-bg: color-mix(in srgb, var(--color-primary) 16%, var(--color-surface));
+  --result-badge-text: var(--color-primary);
+}
+
+.result-badge-小吉 {
+  --result-badge-bg: color-mix(in srgb, var(--color-success) 10%, var(--color-surface));
+  --result-badge-text: color-mix(in srgb, var(--color-success) 78%, var(--color-text));
+}
+
+.result-badge-平 {
+  --result-badge-bg: color-mix(in srgb, var(--color-border) 46%, var(--color-surface));
+  --result-badge-text: var(--color-text-muted);
+}
+
+.result-badge-注意 {
+  --result-badge-bg: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface));
+  --result-badge-text: var(--color-accent);
+}
