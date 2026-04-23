@@ -10,7 +10,7 @@ const fortunePageTemplate = `
     </section>
 
     <section class="fortune-layout">
-      <article class="fortune-panel fortune-form-panel">
+      <section class="fortune-panel fortune-form-panel">
         <tc-section-title text="录入生辰"></tc-section-title>
         <p class="fortune-section-desc">请输入出生日期与时间，性别为可选项。同样输入会得到同样结果。</p>
         <div class="fortune-field-grid">
@@ -36,14 +36,14 @@ const fortunePageTemplate = `
             <button class="fortune-primary-button fortune-submit" type="button">开始测算</button>
           </div>
         </div>
-      </article>
+      </section>
 
-      <article class="fortune-panel fortune-result-card is-empty">
+      <section class="fortune-panel fortune-result-card is-empty">
         <div class="fortune-result-empty">
           <p class="fortune-empty-title">命盘待启</p>
           <p class="fortune-empty-text">输入出生信息后，这里将展示四柱、五行倾向与命理解读。</p>
         </div>
-      </article>
+      </section>
     </section>
   </div>
 `;
@@ -156,6 +156,6 @@ if (!customElements.get("tc-fortune-page")) {
   customElements.define("tc-fortune-page", TcFortunePage);
 }
 
-export function initFortunePage() {}
+export function initFortunePage() { }
 
 export const fortunePageTag = "tc-fortune-page";

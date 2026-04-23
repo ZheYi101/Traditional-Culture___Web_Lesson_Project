@@ -3,7 +3,12 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: var(--shadow-soft);
   animation: rise-in 500ms ease both;
 }
 
@@ -14,6 +19,51 @@
 }
 
 .brand p {
+  margin-top: var(--space-1);
+  color: var(--color-text-muted);
+}
+
+.home-filler-card {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+.home-filler-copy {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+}
+
+.home-filler-list {
+  margin: var(--space-3) 0 0;
+  padding-left: 20px;
+  color: var(--color-text);
+  display: grid;
+  gap: 8px;
+}
+
+.home-filler-grid {
+  margin-top: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-3);
+}
+
+.home-filler-block {
+  padding: var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-bg-alt) 32%, var(--color-surface));
+}
+
+.home-filler-block h3 {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+}
+
+.home-filler-block p {
   margin-top: var(--space-1);
   color: var(--color-text-muted);
 }

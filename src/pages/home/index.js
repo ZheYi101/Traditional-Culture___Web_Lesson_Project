@@ -1,4 +1,3 @@
-import "./components/SolarTermsSection.js";
 import "./components/DivinationSection.js";
 import "../../components/SectionTitle.js";
 
@@ -9,19 +8,14 @@ class TcHomePage extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <header class="page-header">
-        <div class="brand">
-          <h1>节气灵签</h1>
-          <p>传统文化卡片 + 今日运势 + 轻量小游戏入口</p>
-        </div>
-      </header>
-      <tc-solar-terms-section></tc-solar-terms-section>
       <tc-divination-section></tc-divination-section>
-      <section class="section" id="games">
-        <tc-section-title text="小游戏预告"></tc-section-title>
-        <div class="divination-panel">
-          <p>划龙舟节奏点击小游戏将在下一阶段实现，目前保留模块与样式插槽。</p>
-        </div>
+      <section class="section home-filler-card">
+        <tc-section-title text="闲读角"></tc-section-title>
+        <ul class="home-filler-list">
+          <li>山川有灵，草木有心。</li>
+          <li>今日不赶路，只把脚步放轻。</li>
+          <li>先把呼吸调匀，再决定去向。</li>
+        </ul>
       </section>
     `;
   }

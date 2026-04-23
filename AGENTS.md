@@ -58,11 +58,13 @@
 - `src/components/SectionTitle.js`：标题自定义元素 `tc-section-title`。
 - `src/components/SolarTermCard.js`：节气卡片自定义元素 `tc-solar-term-card`。
 - `src/pages/home/index.js`：首页页面级自定义元素 `tc-home-page`。
-- `src/pages/home/components/SolarTermsSection.js`：首页节气区自定义元素 `tc-solar-terms-section`。
 - `src/pages/home/components/DivinationSection.js`：首页占卜区自定义元素 `tc-divination-section` 与哈希取模逻辑。
-- `src/pages/home/constants/solarTerms.js`：首页节气静态数据。
 - `src/pages/play/index.js`：示例小游戏页面级自定义元素 `tc-play-page`。
 - `src/pages/advisor/index.js`：出行问策页面级自定义元素 `tc-advisor-page`，负责对话 UI 与流式响应渲染。
+- `src/pages/terms/index.js`：二十四节气独立页自定义元素 `tc-terms-page`。
+- `src/pages/terms/components/SeasonTermsBoard.js`：节气页季节切换与卡片网格组件 `tc-season-terms-board`。
+- `src/pages/terms/components/TermFlipCard.js`：节气页私有翻转卡组件 `tc-terms-flip-card`（点击翻面）。
+- `src/pages/terms/constants/solarTerms24.js`：二十四节气完整静态数据。
 - `src/pages/pageRegistry.js`：页面注册表，统一维护 hash 路由与页面标签映射。
 - `src/constants/divinationProfiles.js`：占卜与今日运势共用的签文区间配置。
 - `src/constants/fortuneProfiles.js`：生辰八字共用静态映射数据。
@@ -79,6 +81,7 @@
 - `src/styles/components/section-title.css`：标题组件样式。
 - `src/styles/components/solar-term-card.css`：节气卡片组件样式。
 - `src/styles/pages/home.css`：首页布局样式。
+- `src/styles/pages/terms.css`：二十四节气独立页样式（含翻转卡与季节切换样式）。
 - `src/styles/pages/home-divination.css`：首页占卜区样式。
 - `src/styles/pages/play.css`：小游戏示例页样式。
 - `src/styles/pages/advisor.css`：出行问策页面样式。
@@ -362,3 +365,31 @@
 - 验证：待执行（建议本地打开 `#/home` 与 `#/fortune`，确认首页今日运势和八字结果生成正常）。
 - 风险与待办：
 	- 当前环境未提供运行时校验工具，本次调整仅完成源码级检查。
+
+### 2026-04-23 / Codex
+- 目标：首页聚焦“今日运势”，并将二十四节气拆分为独立页面（四季切换 + 私有翻转卡 + 24 节气完整数据）。
+- 修改文件：
+	- `src/components/TopBar.js`
+	- `src/pages/pageRegistry.js`
+	- `src/pages/home/index.js`
+	- `src/styles/pages/home.css`
+	- `src/pages/terms/index.js`（新增）
+	- `src/pages/terms/components/SeasonTermsBoard.js`（新增）
+	- `src/pages/terms/components/TermFlipCard.js`（新增）
+	- `src/pages/terms/constants/solarTerms24.js`（新增）
+	- `src/styles/pages/terms.css`（新增）
+	- `index.html`
+	- `AGENTS.md`
+- 验证：已执行文件级错误检查，以上文件均无语法报错。
+- 风险与待办：
+	- 建议本地手动验证 `#/home` 与 `#/terms` 的布局、翻卡交互和移动端表现。
+
+### 2026-04-23 / Codex
+- 目标：删除首页节气拆页后的旧实现残留，避免维护混淆。
+- 修改文件：
+	- `src/pages/home/components/SolarTermsSection.js`（删除）
+	- `src/pages/home/constants/solarTerms.js`（删除）
+	- `AGENTS.md`
+- 验证：已执行静态错误检查，未发现由删除引入的引用错误。
+- 风险与待办：
+	- `src/components/SolarTermCard.js` 目前未被路由页面使用，如后续确认不再复用可继续清理。

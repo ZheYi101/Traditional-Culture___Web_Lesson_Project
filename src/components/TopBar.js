@@ -2,6 +2,7 @@ import "./ThemeSwitcher.js";
 
 const PAGE_SWITCH_ITEMS = [
   { id: "home", label: "首页" },
+  { id: "terms", label: "二十四节气" },
   { id: "fortune", label: "算命" },
   { id: "play", label: "小游戏" },
   { id: "advisor", label: "出行问策" }
@@ -39,6 +40,7 @@ class TcTopBar extends HTMLElement {
 
       if (item.id === currentPage) {
         link.classList.add("is-active");
+        link.setAttribute("aria-current", "page");
       }
 
       nav.append(link);

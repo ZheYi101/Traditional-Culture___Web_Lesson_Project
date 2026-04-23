@@ -37,8 +37,8 @@ class TcDivinationSection extends HTMLElement {
 
     this.innerHTML = `
       <section class="section" id="divination">
-        <tc-section-title text="今日运势"></tc-section-title>
         <div class="divination-panel">
+          <tc-section-title text="今日运势" class="play-title"></tc-section-title>
           <div class="divination-result">
             ${renderResultHtml(result)}
           </div>

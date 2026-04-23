@@ -179,6 +179,7 @@ function createHero() {
 
     const title = document.createElement("h1");
     title.textContent = "出行问策";
+    title.className = "play-title";
 
     const desc = document.createElement("p");
     desc.textContent = "结合天气、黄历与风险规则，为你的行程生成流式建议。";
