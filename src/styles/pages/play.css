@@ -7,12 +7,625 @@
   box-shadow: var(--shadow-soft);
 }
 
+.play-hero-header {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.play-kicker {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .play-title {
+  margin: 0 0 var(--space-2);
   color: var(--color-primary);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  margin-bottom: var(--space-2);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
 }
 
 .play-desc {
+  max-width: 62ch;
+  margin: 0;
   color: var(--color-text-muted);
+}
+
+.play-back-button,
+.play-mini-game-button {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.play-back-button {
+  padding: 12px 20px;
+  color: var(--color-surface);
+  background: var(--color-primary);
+}
+
+.play-back-button:hover,
+.play-mini-game-button:hover,
+.play-card-action:hover,
+.play-shooter-mode-btn:hover,
+.play-shooter-play-mode-btn:hover {
+  transform: translateY(-1px);
+}
+
+.play-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-3);
+}
+
+.play-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 220px;
+  padding: var(--space-4);
+  background:
+    radial-gradient(circle at top right, rgba(195, 119, 58, 0.14), transparent 34%),
+    linear-gradient(160deg, rgba(255, 250, 242, 0.92), rgba(241, 231, 212, 0.82)),
+    var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.play-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 7px;
+  background: linear-gradient(180deg, var(--color-accent), rgba(47, 93, 98, 0.88));
+}
+
+.play-card::after {
+  content: "";
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 86px;
+  height: 86px;
+  border: 1px solid rgba(195, 119, 58, 0.14);
+  border-radius: 50%;
+  opacity: 0.85;
+}
+
+.play-card-kicker {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.play-card-title {
+  margin: 0 0 var(--space-2);
+  color: var(--color-primary);
+  font-size: 1.6rem;
+}
+
+.play-card-desc {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 28ch;
+}
+
+.play-card-action {
+  align-self: flex-start;
+  padding: 12px 18px;
+  border: 1px solid rgba(109, 67, 36, 0.18);
+  border-radius: 999px;
+  color: #fffaf2;
+  background:
+    linear-gradient(180deg, rgba(146, 88, 44, 0.96), rgba(111, 67, 36, 0.96));
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 224, 0.22),
+    0 8px 18px rgba(34, 49, 63, 0.12);
+}
+
+.play-game-shell {
+  min-height: 640px;
+}
+
+.play-mini-game {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.play-mini-game-panel {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+    var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.play-mini-game-title {
+  margin: 0;
+  color: var(--color-primary);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.play-mini-game-text {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.play-mini-game-label {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.play-mini-game-select {
+  min-width: 160px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-text);
+  background: #f7f0e2;
+  font: inherit;
+}
+
+.play-mini-game-button {
+  padding: 12px 22px;
+  border: 1px solid rgba(109, 67, 36, 0.22);
+  color: #fffaf2;
+  background:
+    linear-gradient(180deg, rgba(146, 88, 44, 0.96), rgba(111, 67, 36, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 244, 224, 0.25),
+    0 8px 18px rgba(34, 49, 63, 0.12);
+}
+
+.play-mini-game-button-start {
+  border-color: rgba(55, 102, 86, 0.28);
+  color: #f8f6ee;
+  background:
+    linear-gradient(180deg, rgba(75, 126, 104, 0.96), rgba(47, 93, 98, 0.96));
+}
+
+.play-mini-game-button-exit {
+  border-color: rgba(122, 63, 70, 0.28);
+  color: #fff6f7;
+  background:
+    linear-gradient(180deg, rgba(162, 92, 98, 0.96), rgba(130, 62, 69, 0.96));
+}
+
+.play-mini-game-pause {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(20, 26, 42, 0.6);
+  border-radius: var(--radius-md);
+  pointer-events: auto;
+}
+
+.play-mini-game-pause h3,
+.play-mini-game-pause p {
+  margin: 0;
+}
+
+.play-dragon-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.play-dragon-stage,
+.play-shooter-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  overflow: auto;
+  border-radius: var(--radius-md);
+}
+
+.play-dragon-canvas,
+.play-shooter-canvas {
+  display: none;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border: 3px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.play-dragon-canvas {
+  background: linear-gradient(180deg, #5ea5d6, #2b6cb0);
+}
+
+.play-dragon-ui,
+.play-shooter-ui {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.play-dragon-status,
+.play-shooter-status,
+.play-shooter-lives {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(6, 16, 30, 0.42);
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.play-dragon-score,
+.play-shooter-score {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.play-dragon-speed,
+.play-shooter-time {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.play-dragon-game-over,
+.play-shooter-game-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.74);
+  border-radius: var(--radius-md);
+  pointer-events: auto;
+}
+
+.play-dragon-game-over h3,
+.play-shooter-game-over h3 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.play-dragon-game-over p,
+.play-shooter-game-over p {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.play-shooter-head {
+  position: relative;
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+}
+
+.play-shooter-title span:nth-child(1) {
+  color: #ff6b6b;
+}
+
+.play-shooter-title span:nth-child(2) {
+  color: #ffd166;
+}
+
+.play-shooter-title span:nth-child(3) {
+  color: #06d6a0;
+}
+
+.play-shooter-title span:nth-child(4) {
+  color: #4cc9f0;
+}
+
+.play-shooter-title span:nth-child(5) {
+  color: #b388ff;
+}
+
+.play-shooter-title span:nth-child(6) {
+  color: #ff85a1;
+}
+
+.play-shooter-title span:nth-child(7) {
+  color: #f4a261;
+}
+
+.play-shooter-title span:nth-child(9) {
+  color: #90f1ef;
+}
+
+.play-shooter-title span:nth-child(10) {
+  color: #ff70a6;
+}
+
+.play-shooter-title span:nth-child(11) {
+  color: #ffd670;
+}
+
+.play-shooter-title span:nth-child(12) {
+  color: #70d6ff;
+}
+
+.play-shooter-title span:nth-child(13) {
+  color: #c77dff;
+}
+
+.play-shooter-title span:nth-child(14) {
+  color: #80ed99;
+}
+
+.play-shooter-title span:nth-child(15) {
+  color: #ff9770;
+}
+
+.play-shooter-space {
+  display: inline-block;
+  width: 16px;
+}
+
+.play-shooter-rule-banner {
+  margin: 0;
+  padding: 14px 18px;
+  color: #6f4a2d;
+  text-align: center;
+  line-height: 1.8;
+  background:
+    linear-gradient(135deg, rgba(246, 226, 196, 0.96), rgba(236, 210, 172, 0.92));
+  border: 1px solid rgba(195, 119, 58, 0.24);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 8px 18px rgba(34, 49, 63, 0.08);
+}
+
+.play-shooter-lives {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+  letter-spacing: 4px;
+  color: #ff6b81;
+}
+
+.play-shooter-life-lost {
+  color: rgba(255, 255, 255, 0.24);
+}
+
+.play-shooter-panel {
+  background: #e3e8e3;
+  border-color: rgba(36, 39, 56, 0.14);
+}
+
+.play-shooter-panel .play-mini-game-title,
+.play-shooter-panel .play-mini-game-text,
+.play-shooter-panel .play-mini-game-label {
+  color: #242738;
+}
+
+.play-shooter-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-4);
+  background:
+    linear-gradient(180deg, rgba(247, 240, 226, 0.96), rgba(232, 221, 199, 0.94));
+  border: 1px solid rgba(109, 67, 36, 0.16);
+  border-radius: 18px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.play-shooter-mode-picker,
+.play-shooter-play-mode-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.play-shooter-mode-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.play-shooter-mode-row-hell {
+  width: 100%;
+}
+
+.play-shooter-hint {
+  margin: 0;
+  color: rgba(36, 39, 56, 0.76);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.play-shooter-mode-btn,
+.play-shooter-play-mode-btn {
+  padding: 9px 16px;
+  border: 1px solid rgba(109, 67, 36, 0.18);
+  border-radius: 999px;
+  color: #5a3a22;
+  background: rgba(255, 250, 242, 0.82);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.play-shooter-mode-btn.active,
+.play-shooter-play-mode-btn.active {
+  color: #fffaf2;
+  background: linear-gradient(180deg, rgba(146, 88, 44, 0.96), rgba(111, 67, 36, 0.96));
+  border-color: rgba(109, 67, 36, 0.3);
+}
+
+.play-shooter-mode-btn.mode-easy.active {
+  background: linear-gradient(180deg, rgba(86, 139, 112, 0.96), rgba(65, 114, 92, 0.96));
+  border-color: rgba(65, 114, 92, 0.34);
+}
+
+.play-shooter-mode-btn.mode-normal.active {
+  background: linear-gradient(180deg, rgba(188, 140, 73, 0.96), rgba(146, 88, 44, 0.96));
+  border-color: rgba(146, 88, 44, 0.34);
+}
+
+.play-shooter-mode-btn.mode-hard.active {
+  background: linear-gradient(180deg, rgba(170, 96, 84, 0.96), rgba(130, 62, 69, 0.96));
+  border-color: rgba(130, 62, 69, 0.34);
+}
+
+.play-shooter-mode-btn.mode-hell.active {
+  background: linear-gradient(180deg, rgba(103, 72, 106, 0.96), rgba(76, 53, 86, 0.96));
+  border-color: rgba(76, 53, 86, 0.34);
+}
+
+.play-shooter-start-button {
+  background: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.play-shooter-canvas {
+  background: #242738;
+}
+
+.play-shooter-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: rgba(2, 6, 14, 0.72);
+}
+
+.play-shooter-dialog {
+  min-width: min(420px, calc(100vw - 32px));
+  padding: 22px 24px;
+  color: var(--color-surface);
+  text-align: center;
+  background: linear-gradient(180deg, rgba(34, 49, 63, 0.96), rgba(47, 93, 98, 0.96));
+  border: 1px solid rgba(216, 204, 181, 0.28);
+  border-radius: 18px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(195, 119, 58, 0.14);
+}
+
+.play-shooter-dialog h3,
+.play-shooter-dialog p {
+  margin: 0 0 var(--space-3);
+}
+
+.play-shooter-game-over-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  justify-content: center;
+}
+
+.is-hidden {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .play-hero-header {
+    flex-direction: column;
+  }
+
+  .play-back-button {
+    align-self: flex-start;
+  }
+
+  .play-dragon-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .play-dragon-status,
+  .play-shooter-status {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .play-hero,
+  .play-board,
+  .play-card,
+  .play-mini-game-panel {
+    padding: var(--space-3);
+  }
+
+  .play-shooter-game-over-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .play-dragon-stage,
+  .play-shooter-stage {
+    border-radius: var(--radius-sm);
+  }
+
+  .play-dragon-canvas,
+  .play-shooter-canvas {
+    border-width: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  .play-dragon-status,
+  .play-shooter-status {
+    top: 8px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .play-dragon-speed,
+  .play-shooter-time {
+    right: 8px;
+  }
+
+  .play-dragon-score,
+  .play-shooter-score {
+    left: 8px;
+  }
+
+  .play-shooter-lives {
+    top: 8px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    letter-spacing: 3px;
+  }
 }
