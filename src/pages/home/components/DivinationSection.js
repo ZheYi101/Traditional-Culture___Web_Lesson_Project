@@ -1,6 +1,6 @@
 import "../../../components/SectionTitle.js";
 import "../../../components/ResultBadge.js";
-import { getDailyFortuneResult } from "../../../service/divinationService.js";
+import { getDailyFortuneResult } from "../../../services/divinationService.js";
 
 function renderResultHtml(result) {
   return `

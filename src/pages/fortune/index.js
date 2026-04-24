@@ -1,6 +1,6 @@
 import "../../components/SectionTitle.js";
 import "../../components/ResultBadge.js";
-import { getFortuneResult } from "../../service/fortuneService.js";
+import { getFortuneResult } from "../../services/fortuneService.js";
 
 const fortunePageTemplate = `
   <div class="fortune-page">

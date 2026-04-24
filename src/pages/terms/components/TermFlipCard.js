@@ -59,7 +59,7 @@ class TcTermsFlipCard extends HTMLElement {
         const back = document.createElement("span");
         back.className = "term-face term-back";
         back.innerHTML = `
-      <span class="term-back-label">${name} · 详细介绍</span>
+      <span class="term-back-label">${name}</span>
       <span class="term-back-copy">${detail}</span>
       <span class="term-hint">再次点击返回正面</span>
     `;

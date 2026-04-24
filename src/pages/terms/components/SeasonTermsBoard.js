@@ -1,6 +1,6 @@
 import "../../../components/SectionTitle.js";
 import "./TermFlipCard.js";
-import { solarTerms24 } from "../constants/solarTerms24.js";
+import { seasonMediaBySeason, solarTerms24 } from "../constants/solarTerms24.js";
 
 const SEASONS = ["春", "夏", "秋", "冬"];
 
@@ -42,8 +42,52 @@ class TcSeasonTermsBoard extends HTMLElement {
         }
 
         this.currentSeason = nextSeason;
+        this.renderSeasonMedia();
         this.renderCards();
         this.renderButtons();
+    }
+
+    renderSeasonMedia() {
+        const mediaSection = this.querySelector(".terms-season-media");
+
+        if (!mediaSection) {
+            return;
+        }
+
+        const flvSrc = seasonMediaBySeason[this.currentSeason] || "";
+        const mp4Src = flvSrc.replace(/\.mp4$/i, ".mp4");
+
+        mediaSection.innerHTML = `
+            <div class="terms-season-media-head">
+                <p class="terms-season-media-title">${this.currentSeason}季影像</p>
+            </div>
+            <div class="terms-season-media-wrap">
+                <video class="terms-season-video" muted autoplay loop playsinline preload="metadata" aria-label="${this.currentSeason}季节气影像">
+                    <source src="${mp4Src}" type="video/mp4">
+                </video>
+            </div>
+        `;
+
+        const mediaWrap = mediaSection.querySelector(".terms-season-media-wrap");
+        const media = mediaSection.querySelector(".terms-season-video");
+        const fallback = mediaSection.querySelector(".terms-season-media-fallback");
+
+        if (!mediaWrap || !media || !fallback) {
+            return;
+        }
+
+        const showFallback = () => {
+            mediaWrap.classList.add("is-fallback");
+            fallback.hidden = false;
+        };
+
+        const hideFallback = () => {
+            mediaWrap.classList.remove("is-fallback");
+            fallback.hidden = true;
+        };
+
+        media.addEventListener("loadeddata", hideFallback, { once: true });
+        media.addEventListener("error", showFallback, { once: true });
     }
 
     renderButtons() {
@@ -106,13 +150,17 @@ class TcSeasonTermsBoard extends HTMLElement {
 
         toolbar.append(switcher);
 
+        const mediaSection = document.createElement("section");
+        mediaSection.className = "terms-season-media";
+
         const grid = document.createElement("div");
         grid.className = "terms-cards-grid";
 
-        section.append(title, toolbar, grid);
+        section.append(title, toolbar, mediaSection, grid);
         this.replaceChildren(section);
 
         this.renderButtons();
+        this.renderSeasonMedia();
         this.renderCards();
     }
 }

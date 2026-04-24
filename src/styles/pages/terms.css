@@ -84,6 +84,50 @@
   gap: var(--space-3);
 }
 
+.terms-season-media {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: 10px;
+}
+
+.terms-season-media-title {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.terms-season-media-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  background: color-mix(in srgb, var(--color-bg-alt) 60%, var(--color-surface));
+  box-shadow: var(--shadow-soft);
+}
+
+.terms-season-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.terms-season-media-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+  background: color-mix(in srgb, var(--color-bg-alt) 66%, var(--color-surface));
+}
+
+.terms-season-media-wrap.is-fallback .terms-season-video {
+  display: none;
+}
+
 .term-flip-card {
   perspective: 1200px;
   min-height: 284px;

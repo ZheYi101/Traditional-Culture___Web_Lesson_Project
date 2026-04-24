@@ -1,3 +1,10 @@
+export const seasonMediaBySeason = {
+    春: new URL("../../../assets/spring.mp4", import.meta.url).href,
+    夏: new URL("../../../assets/summer.mp4", import.meta.url).href,
+    秋: new URL("../../../assets/autumn.mp4", import.meta.url).href,
+    冬: new URL("../../../assets/winter.mp4", import.meta.url).href
+};
+
 export const solarTerms24 = [
     {
         name: "立春",
