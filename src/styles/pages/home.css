@@ -31,6 +31,99 @@
   box-shadow: var(--shadow-soft);
 }
 
+.home-reading-card {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.home-reading-tip {
+  margin-top: -6px;
+  color: var(--color-text-muted);
+}
+
+.reading-stack {
+  position: relative;
+  margin-top: var(--space-3);
+  min-height: 280px;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.reading-card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid color-mix(in srgb, var(--color-border) 84%, transparent);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--color-surface) 94%, white), color-mix(in srgb, var(--color-bg-alt) 32%, var(--color-surface)));
+  box-shadow: var(--shadow-card);
+  transform-origin: center;
+  transition: transform 220ms ease, opacity 220ms ease, box-shadow 220ms ease;
+  will-change: transform, opacity;
+}
+
+.reading-card.is-active {
+  z-index: 2;
+  cursor: grab;
+}
+
+.reading-card.is-active:active,
+.reading-card.is-active.is-dragging {
+  cursor: grabbing;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.18);
+}
+
+.reading-card.is-next {
+  z-index: 1;
+  transform: scale(0.96) translateY(-10px);
+  opacity: 0.72;
+}
+
+.reading-card.is-flying-out {
+  transition: transform 260ms ease, opacity 260ms ease;
+  opacity: 0;
+}
+
+.reading-card.is-flying-out.to-left {
+  transform: translateX(-140%) rotate(-18deg);
+}
+
+.reading-card.is-flying-out.to-right {
+  transform: translateX(140%) rotate(18deg);
+}
+
+.reading-card-kicker {
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+}
+
+.reading-card-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--color-primary);
+}
+
+.reading-card-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.5;
+}
+
+.reading-card-note {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  color: var(--color-text-muted);
+  border-top: 1px dashed color-mix(in srgb, var(--color-border) 90%, transparent);
+}
+
 .home-filler-copy {
   margin-top: var(--space-2);
   color: var(--color-text-muted);
@@ -87,5 +180,9 @@
   .page-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .reading-stack {
+    min-height: 320px;
   }
 }
