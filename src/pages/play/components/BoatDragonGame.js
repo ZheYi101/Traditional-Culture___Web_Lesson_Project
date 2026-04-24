@@ -1,18 +1,20 @@
-const boatImageUrl = new URL('../assets/boat.png', import.meta.url).href
-const stoneImageUrl = new URL('../assets/stone.png', import.meta.url).href
-
-const BOAT_X = 80
-const BOAT_WIDTH = 300
-const BOAT_HEIGHT = 150
-const OBSTACLE_WIDTH = 100
-const OBSTACLE_HEIGHT = 80
-const BOAT_COLLISION_TOLERANCE = 10
-const MAX_SPEED = 14
-const ACCELERATION = 0.12
-const BASE_GAP = 500
-const OBSTACLE_CLEANUP_THRESHOLD = -50
-const BOUNCE_SPEED = 0.05
-const BOUNCE_AMPLITUDE = 3
+import {
+  ACCELERATION,
+  BASE_GAP,
+  BOAT_GAME_COLORS,
+  BOAT_COLLISION_TOLERANCE,
+  BOAT_HEIGHT,
+  BOAT_WIDTH,
+  BOAT_X,
+  BOUNCE_AMPLITUDE,
+  BOUNCE_SPEED,
+  MAX_SPEED,
+  OBSTACLE_CLEANUP_THRESHOLD,
+  OBSTACLE_HEIGHT,
+  OBSTACLE_WIDTH,
+  boatImageUrl,
+  stoneImageUrl,
+} from "../constants/boatGameConfig.js"
 
 class TcBoatDragonGame extends HTMLElement {
   constructor() {
@@ -385,7 +387,7 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
     this.ctx.setLineDash([10, 15])
-    this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)'
+    this.ctx.strokeStyle = BOAT_GAME_COLORS.laneLine
     this.ctx.lineWidth = 2
 
     this.laneY.forEach((lane) => {
@@ -427,7 +429,7 @@ class TcBoatDragonGame extends HTMLElement {
 
   drawDragonBoat(x, y, width, height) {
     this.ctx.save()
-    this.ctx.fillStyle = '#d69e2e'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.boatBody
     this.ctx.beginPath()
     this.ctx.moveTo(x, y + height * 0.3)
     this.ctx.lineTo(x + width * 0.1, y + height * 0.1)
@@ -440,7 +442,7 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.closePath()
     this.ctx.fill()
 
-    this.ctx.strokeStyle = '#b7791f'
+    this.ctx.strokeStyle = BOAT_GAME_COLORS.boatTrim
     this.ctx.lineWidth = 2
     this.ctx.beginPath()
     this.ctx.moveTo(x + width * 0.1, y + height * 0.1)
@@ -456,7 +458,7 @@ class TcBoatDragonGame extends HTMLElement {
       this.ctx.stroke()
     }
 
-    this.ctx.fillStyle = '#e53e3e'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.dragonRed
     this.ctx.beginPath()
     this.ctx.moveTo(x + width, y + height * 0.3)
     this.ctx.lineTo(x + width + 30, y + height * 0.5)
@@ -464,12 +466,12 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.closePath()
     this.ctx.fill()
 
-    this.ctx.fillStyle = '#000000'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.dragonEye
     this.ctx.beginPath()
     this.ctx.arc(x + width + 10, y + height * 0.5 - 5, 3, 0, Math.PI * 2)
     this.ctx.fill()
 
-    this.ctx.strokeStyle = '#d69e2e'
+    this.ctx.strokeStyle = BOAT_GAME_COLORS.boatBody
     this.ctx.lineWidth = 3
     this.ctx.beginPath()
     this.ctx.moveTo(x + width + 15, y + height * 0.4)
@@ -478,7 +480,7 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.lineTo(x + width + 25, y + height * 0.7)
     this.ctx.stroke()
 
-    this.ctx.strokeStyle = '#e53e3e'
+    this.ctx.strokeStyle = BOAT_GAME_COLORS.dragonRed
     this.ctx.lineWidth = 1.5
     this.ctx.beginPath()
     this.ctx.moveTo(x + width + 5, y + height * 0.45)
@@ -487,7 +489,7 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.lineTo(x + width + 20, y + height * 0.6)
     this.ctx.stroke()
 
-    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.wake
     const wave = Math.sin(Date.now() * 0.01) * 5
     this.ctx.beginPath()
     this.ctx.moveTo(x - 10, y + height * 0.3 + wave)
@@ -500,7 +502,7 @@ class TcBoatDragonGame extends HTMLElement {
 
   drawRock(x, y, width, height) {
     this.ctx.save()
-    this.ctx.fillStyle = '#6b7280'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.rockBody
     this.ctx.beginPath()
     this.ctx.moveTo(x + width / 2, y + height * 0.1)
     this.ctx.quadraticCurveTo(
@@ -530,7 +532,7 @@ class TcBoatDragonGame extends HTMLElement {
     this.ctx.closePath()
     this.ctx.fill()
 
-    this.ctx.strokeStyle = '#4b5563'
+    this.ctx.strokeStyle = BOAT_GAME_COLORS.rockCrack
     this.ctx.lineWidth = 1.5
     this.ctx.beginPath()
     this.ctx.moveTo(x + width * 0.3, y + height * 0.2)
@@ -556,7 +558,7 @@ class TcBoatDragonGame extends HTMLElement {
     )
     this.ctx.stroke()
 
-    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.rockHighlight
     this.ctx.beginPath()
     this.ctx.ellipse(
       x + width * 0.3,
@@ -569,7 +571,7 @@ class TcBoatDragonGame extends HTMLElement {
     )
     this.ctx.fill()
 
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'
+    this.ctx.fillStyle = BOAT_GAME_COLORS.rockShadow
     this.ctx.beginPath()
     this.ctx.ellipse(
       x + width * 0.7,

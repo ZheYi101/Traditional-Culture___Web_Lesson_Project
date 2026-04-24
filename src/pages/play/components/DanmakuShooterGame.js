@@ -1,89 +1,41 @@
-const PLAYER_WIDTH = 80;
-const PLAYER_HEIGHT = 20;
-const PLAYER_SPEED = 360;
-const PLAYER_COLOR = "#ffffff";
-const PLAYER_MAX_LIVES = 3;
-const PLAYER_INVULNERABLE_DURATION = 1200;
-const PLAYER_TRIPLE_SHOT_DURATION = 3000;
-const PLAYER_TRIPLE_SHOT_ANGLE_DEG = 35;
-const HELL_PLAYER_SCALE = 1 / 3;
-const DEFAULT_CANVAS_WIDTH = 960;
-const DEFAULT_CANVAS_HEIGHT = 720;
-const HELL_CANVAS_WIDTH = 1180;
-const HELL_CANVAS_HEIGHT = 860;
-
-const ENEMY_BASE_WIDTH = 80;
-const ENEMY_BASE_HEIGHT = 20;
-const ENEMY_WIDTH_SCALE_MIN = 0.5;
-const ENEMY_WIDTH_SCALE_MAX = 1;
-const ENEMY_VERTICAL_SPEED = 72;
-const ENEMY_HORIZONTAL_SPEED_MIN = 70;
-const ENEMY_HORIZONTAL_SPEED_MAX = 140;
-const ENEMY_BASE_COLORS = ["#FF5252", "#448AFF", "#69F0AE", "#FFD740", "#FF80AB", "#B388FF"];
-const ENEMY_SPAWN_PADDING = 24;
-
-const BULLET_WIDTH = 10;
-const BULLET_HEIGHT = 20;
-const PLAYER_BULLET_SPEED = 520;
-const ENEMY_BULLET_SPEED = 300;
-const PLAYER_BULLET_COLOR = "#18FFFF";
-const BOUNCE_BULLET_MIN_ANGLE_DEG = 30;
-const BOUNCE_BULLET_MAX_ANGLE_DEG = 60;
-
-const POWER_UP_SIZE = 24;
-const POWER_UP_FALL_SPEED = 150;
-const SHIELD_DURATION = 8000;
-const POWER_UP_DROP_CHANCE = 0.18;
-
-const GAME_MODES = {
-  easy: {
-    minEnemies: 3,
-    maxEnemies: 7,
-    spawnCheckInterval: 1500,
-    spawnGap: 180,
-    bounceShooterRatio: 0.25,
-    triangleShooterRatio: 0.08,
-    canvasWidth: DEFAULT_CANVAS_WIDTH,
-    canvasHeight: DEFAULT_CANVAS_HEIGHT,
-  },
-  normal: {
-    minEnemies: 5,
-    maxEnemies: 9,
-    spawnCheckInterval: 1500,
-    spawnGap: 180,
-    bounceShooterRatio: 0.25,
-    triangleShooterRatio: 0.08,
-    canvasWidth: DEFAULT_CANVAS_WIDTH,
-    canvasHeight: DEFAULT_CANVAS_HEIGHT,
-  },
-  hard: {
-    minEnemies: 7,
-    maxEnemies: 12,
-    spawnCheckInterval: 1500,
-    spawnGap: 180,
-    bounceShooterRatio: 0.25,
-    triangleShooterRatio: 0.08,
-    canvasWidth: DEFAULT_CANVAS_WIDTH,
-    canvasHeight: DEFAULT_CANVAS_HEIGHT,
-  },
-  hell: {
-    minEnemies: 12,
-    maxEnemies: 12,
-    spawnCheckInterval: 500,
-    spawnGap: 0,
-    bounceShooterRatio: 0.46,
-    triangleShooterRatio: 0.24,
-    canvasWidth: HELL_CANVAS_WIDTH,
-    canvasHeight: HELL_CANVAS_HEIGHT,
-    hellTargetTriangles: 2,
-  },
-};
-
-const MODE_ORDER = ["easy", "normal", "hard", "hell"];
-const PLAY_MODE_ORDER = ["basic", "full"];
-const ENEMY_SHOOT_INTERVAL = 1000;
-const TRIANGLE_ENEMY_SHOOT_INTERVAL = 650;
-const PLAYER_SHOOT_INTERVAL = 200;
+import {
+  BOUNCE_BULLET_MAX_ANGLE_DEG,
+  BOUNCE_BULLET_MIN_ANGLE_DEG,
+  BULLET_HEIGHT,
+  BULLET_WIDTH,
+  ENEMY_BASE_COLORS,
+  ENEMY_BASE_HEIGHT,
+  ENEMY_BASE_WIDTH,
+  ENEMY_HORIZONTAL_SPEED_MAX,
+  ENEMY_HORIZONTAL_SPEED_MIN,
+  ENEMY_SHOOT_INTERVAL,
+  ENEMY_SPAWN_PADDING,
+  ENEMY_VERTICAL_SPEED,
+  ENEMY_WIDTH_SCALE_MAX,
+  ENEMY_WIDTH_SCALE_MIN,
+  ENEMY_BULLET_SPEED,
+  GAME_MODES,
+  HELL_PLAYER_SCALE,
+  MODE_ORDER,
+  PLAYER_BULLET_COLOR,
+  PLAYER_BULLET_SPEED,
+  PLAYER_COLOR,
+  PLAYER_HEIGHT,
+  PLAYER_INVULNERABLE_DURATION,
+  PLAYER_MAX_LIVES,
+  PLAYER_SHOOT_INTERVAL,
+  PLAYER_SPEED,
+  PLAYER_TRIPLE_SHOT_ANGLE_DEG,
+  PLAYER_TRIPLE_SHOT_DURATION,
+  PLAYER_WIDTH,
+  PLAY_MODE_ORDER,
+  POWER_UP_DROP_CHANCE,
+  POWER_UP_FALL_SPEED,
+  POWER_UP_SIZE,
+  SHOOTER_EFFECT_COLORS,
+  SHIELD_DURATION,
+  TRIANGLE_ENEMY_SHOOT_INTERVAL,
+} from "../constants/shooterConfig.js";
 
 class TcDanmakuShooterGame extends HTMLElement {
   constructor() {
@@ -1248,9 +1200,9 @@ class TcDanmakuShooterGame extends HTMLElement {
 
     if (performance.now() < this.player.shieldUntil) {
       this.ctx.save();
-      this.ctx.strokeStyle = "#7FDBFF";
+      this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.shield;
       this.ctx.lineWidth = 3;
-      this.ctx.shadowColor = "#7FDBFF";
+      this.ctx.shadowColor = SHOOTER_EFFECT_COLORS.shield;
       this.ctx.shadowBlur = 12;
       this.ctx.strokeRect(
         this.player.x - 6,
@@ -1273,28 +1225,28 @@ class TcDanmakuShooterGame extends HTMLElement {
       );
 
       if (powerUp.type === "shield") {
-        this.ctx.fillStyle = "#7FDBFF";
-        this.ctx.shadowColor = "#7FDBFF";
+        this.ctx.fillStyle = SHOOTER_EFFECT_COLORS.shield;
+        this.ctx.shadowColor = SHOOTER_EFFECT_COLORS.shield;
         this.ctx.shadowBlur = 12;
         this.ctx.beginPath();
         this.ctx.arc(0, 0, powerUp.width / 2, 0, Math.PI * 2);
         this.ctx.fill();
 
-        this.ctx.strokeStyle = "#FFFFFF";
+        this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.contrast;
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
         this.ctx.arc(0, 0, powerUp.width / 3.2, 0, Math.PI * 2);
         this.ctx.stroke();
       } else if (powerUp.type === "heal") {
-        this.ctx.fillStyle = "#FF6B81";
-        this.ctx.shadowColor = "#FF6B81";
+        this.ctx.fillStyle = SHOOTER_EFFECT_COLORS.heal;
+        this.ctx.shadowColor = SHOOTER_EFFECT_COLORS.heal;
         this.ctx.shadowBlur = 12;
         this.ctx.fillRect(-5, -11, 10, 22);
         this.ctx.fillRect(-11, -5, 22, 10);
       } else {
-        this.ctx.strokeStyle = "#FFD166";
+        this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.tripleShot;
         this.ctx.lineWidth = 3;
-        this.ctx.shadowColor = "#FFD166";
+        this.ctx.shadowColor = SHOOTER_EFFECT_COLORS.tripleShot;
         this.ctx.shadowBlur = 12;
         this.ctx.beginPath();
         this.ctx.moveTo(0, -10);
@@ -1353,7 +1305,7 @@ class TcDanmakuShooterGame extends HTMLElement {
       this.ctx.fillRect(-bullet.width / 2, -bullet.height / 2, bullet.width, bullet.height);
 
       if (bullet.isBouncy) {
-        this.ctx.strokeStyle = "#FFFFFF";
+        this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.contrast;
         this.ctx.lineWidth = 1.5;
         this.ctx.strokeRect(-bullet.width / 2, -bullet.height / 2, bullet.width, bullet.height);
       }
@@ -1367,7 +1319,7 @@ class TcDanmakuShooterGame extends HTMLElement {
 
     if (enemy.shotPattern === "bounce") {
       this.ctx.save();
-      this.ctx.strokeStyle = "#FFFFFF";
+      this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.contrast;
       this.ctx.lineWidth = 2;
       this.ctx.beginPath();
       this.ctx.ellipse(
@@ -1393,7 +1345,7 @@ class TcDanmakuShooterGame extends HTMLElement {
     this.ctx.fill();
 
     this.ctx.save();
-    this.ctx.strokeStyle = "#FFFFFF";
+    this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.contrast;
     this.ctx.lineWidth = 2;
     this.ctx.beginPath();
     this.ctx.moveTo(x + width / 2, y + 4);
@@ -1403,9 +1355,9 @@ class TcDanmakuShooterGame extends HTMLElement {
     this.ctx.stroke();
 
     if (enemy.shieldHitsRemaining > 0) {
-      this.ctx.strokeStyle = "#7FDBFF";
+      this.ctx.strokeStyle = SHOOTER_EFFECT_COLORS.shield;
       this.ctx.lineWidth = 2.5;
-      this.ctx.shadowColor = "#7FDBFF";
+      this.ctx.shadowColor = SHOOTER_EFFECT_COLORS.shield;
       this.ctx.shadowBlur = 10;
       this.ctx.beginPath();
       this.ctx.ellipse(x + width / 2, y + height / 2, width * 0.72, height * 0.9, 0, 0, Math.PI * 2);

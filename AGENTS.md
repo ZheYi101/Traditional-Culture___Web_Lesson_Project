@@ -60,6 +60,11 @@
 - `src/pages/home/index.js`：首页页面级自定义元素 `tc-home-page`。
 - `src/pages/home/components/DivinationSection.js`：首页占卜区自定义元素 `tc-divination-section` 与哈希取模逻辑。
 - `src/pages/play/index.js`：示例小游戏页面级自定义元素 `tc-play-page`。
+- `src/pages/play/components/BoatDragonGame.js`：赛龙舟小游戏自定义元素 `tc-boat-dragon-game`，负责航道切换、碰撞判定与暂停/结算状态。
+- `src/pages/play/components/DanmakuShooterGame.js`：弹幕射击小游戏自定义元素 `tc-danmaku-shooter-game`，负责难度、玩法模式、掉落物与暂停/结算状态。
+- `src/pages/play/constants/gameItems.js`：小游戏大厅卡片与页面入口配置。
+- `src/pages/play/constants/boatGameConfig.js`：赛龙舟页面私有静态配置与资源入口。
+- `src/pages/play/constants/shooterConfig.js`：弹幕射击页面私有静态配置与模式参数。
 - `src/pages/advisor/index.js`：出行问策页面级自定义元素 `tc-advisor-page`，负责对话 UI 与流式响应渲染。
 - `src/pages/terms/index.js`：二十四节气独立页自定义元素 `tc-terms-page`。
 - `src/pages/terms/components/SeasonTermsBoard.js`：节气页季节切换与卡片网格组件 `tc-season-terms-board`。
@@ -393,3 +398,31 @@
 - 验证：已执行静态错误检查，未发现由删除引入的引用错误。
 - 风险与待办：
 	- `src/components/SolarTermCard.js` 目前未被路由页面使用，如后续确认不再复用可继续清理。
+
+### 2026-04-23 / Codex
+- 目标：将小游戏页面专用静态数据迁移到 `src/pages/play/constants`，收口小游戏局部主题 token，并补齐模块索引与执行记录。
+- 修改文件：
+	- `src/pages/play/index.js`
+	- `src/pages/play/components/BoatDragonGame.js`
+	- `src/pages/play/components/DanmakuShooterGame.js`
+	- `src/pages/play/constants/gameItems.js`（新增）
+	- `src/pages/play/constants/boatGameConfig.js`（新增）
+	- `src/pages/play/constants/shooterConfig.js`（新增）
+	- `src/styles/pages/play.css`
+	- `AGENTS.md`
+- 验证：已执行前端 JS `node --check`，确认小游戏页面与两个小游戏组件在迁移常量后无语法报错。
+- 风险与待办：
+	- Canvas 绘制色值仍包含少量游戏内局部配色常量；若后续需要做多主题细分，可再进一步提升为可切换主题 token。
+
+### 2026-04-23 / Codex
+- 目标：继续规范小游戏模块，收拢 canvas 绘制配色常量，并将 README 页面初始化说明与当前 Web Components 规范对齐。
+- 修改文件：
+	- `src/pages/play/components/BoatDragonGame.js`
+	- `src/pages/play/components/DanmakuShooterGame.js`
+	- `src/pages/play/constants/boatGameConfig.js`
+	- `src/pages/play/constants/shooterConfig.js`
+	- `README.md`
+	- `AGENTS.md`
+- 验证：待执行（建议本地刷新 `#/play`，确认两个小游戏绘制表现与暂停/结算流程正常）。
+- 风险与待办：
+	- `play.css` 中仍保留一部分页面级视觉 token 与装饰渐变值；这些值已集中在页面样式层，但若后续要做更严格的主题体系，还可再提升到共享主题变量。

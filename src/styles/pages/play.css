@@ -1,3 +1,35 @@
+tc-play-page {
+  --play-card-edge: var(--color-accent);
+  --play-card-surface: var(--color-bg-alt);
+  --play-card-ink-strong: var(--color-primary);
+  --play-card-ink-soft: var(--color-text-muted);
+  --play-card-button-text: var(--color-surface);
+  --play-card-button-bg: var(--color-primary);
+  --play-card-button-bg-strong: #6f4324;
+  --play-mini-select-bg: #f7f0e2;
+  --play-button-start-bg: var(--color-success);
+  --play-button-start-bg-strong: var(--color-primary);
+  --play-button-exit-bg: #a25c62;
+  --play-button-exit-bg-strong: #823e45;
+  --play-overlay-bg: rgba(20, 26, 42, 0.6);
+  --play-status-bg: rgba(6, 16, 30, 0.42);
+  --play-status-text: #ffffff;
+  --play-dragon-river-start: #5ea5d6;
+  --play-dragon-river-end: #2b6cb0;
+  --play-shooter-panel-bg: #e3e8e3;
+  --play-shooter-stage-bg: #242738;
+  --play-shooter-option-surface: #f7f0e2;
+  --play-shooter-option-surface-strong: #e8ddc7;
+  --play-shooter-option-border: rgba(109, 67, 36, 0.16);
+  --play-shooter-option-text: #242738;
+  --play-shooter-banner-bg: #ecd2ac;
+  --play-shooter-banner-bg-soft: #f6e2c4;
+  --play-shooter-banner-text: #6f4a2d;
+  --play-shooter-modal-start: #22313f;
+  --play-shooter-modal-end: var(--color-primary);
+  --play-shooter-life-text: #ff6b81;
+}
+
 .play-hero,
 .play-board {
   background: var(--color-surface);
@@ -79,7 +111,7 @@
   background:
     radial-gradient(circle at top right, rgba(195, 119, 58, 0.14), transparent 34%),
     linear-gradient(160deg, rgba(255, 250, 242, 0.92), rgba(241, 231, 212, 0.82)),
-    var(--color-bg-alt);
+    var(--play-card-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
@@ -91,7 +123,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 7px;
-  background: linear-gradient(180deg, var(--color-accent), rgba(47, 93, 98, 0.88));
+  background: linear-gradient(180deg, var(--play-card-edge), rgba(47, 93, 98, 0.88));
 }
 
 .play-card::after {
@@ -116,13 +148,13 @@
 
 .play-card-title {
   margin: 0 0 var(--space-2);
-  color: var(--color-primary);
+  color: var(--play-card-ink-strong);
   font-size: 1.6rem;
 }
 
 .play-card-desc {
   margin: 0;
-  color: var(--color-text-muted);
+  color: var(--play-card-ink-soft);
   line-height: 1.7;
   max-width: 28ch;
 }
@@ -132,9 +164,9 @@
   padding: 12px 18px;
   border: 1px solid rgba(109, 67, 36, 0.18);
   border-radius: 999px;
-  color: #fffaf2;
+  color: var(--play-card-button-text);
   background:
-    linear-gradient(180deg, rgba(146, 88, 44, 0.96), rgba(111, 67, 36, 0.96));
+    linear-gradient(180deg, var(--color-accent), var(--play-card-button-bg-strong));
   cursor: pointer;
   font: inherit;
   font-weight: 700;
@@ -186,16 +218,16 @@
   border: 1px solid var(--color-border);
   border-radius: 12px;
   color: var(--color-text);
-  background: #f7f0e2;
+  background: var(--play-mini-select-bg);
   font: inherit;
 }
 
 .play-mini-game-button {
   padding: 12px 22px;
   border: 1px solid rgba(109, 67, 36, 0.22);
-  color: #fffaf2;
+  color: var(--play-card-button-text);
   background:
-    linear-gradient(180deg, rgba(146, 88, 44, 0.96), rgba(111, 67, 36, 0.96));
+    linear-gradient(180deg, var(--color-accent), var(--play-card-button-bg-strong));
   box-shadow:
     inset 0 1px 0 rgba(255, 244, 224, 0.25),
     0 8px 18px rgba(34, 49, 63, 0.12);
@@ -203,16 +235,16 @@
 
 .play-mini-game-button-start {
   border-color: rgba(55, 102, 86, 0.28);
-  color: #f8f6ee;
+  color: var(--play-card-button-text);
   background:
-    linear-gradient(180deg, rgba(75, 126, 104, 0.96), rgba(47, 93, 98, 0.96));
+    linear-gradient(180deg, var(--play-button-start-bg), var(--play-button-start-bg-strong));
 }
 
 .play-mini-game-button-exit {
   border-color: rgba(122, 63, 70, 0.28);
-  color: #fff6f7;
+  color: var(--play-card-button-text);
   background:
-    linear-gradient(180deg, rgba(162, 92, 98, 0.96), rgba(130, 62, 69, 0.96));
+    linear-gradient(180deg, var(--play-button-exit-bg), var(--play-button-exit-bg-strong));
 }
 
 .play-mini-game-pause {
@@ -223,8 +255,8 @@
   gap: var(--space-2);
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  background: rgba(20, 26, 42, 0.6);
+  color: var(--play-status-text);
+  background: var(--play-overlay-bg);
   border-radius: var(--radius-md);
   pointer-events: auto;
 }
@@ -264,7 +296,7 @@
 }
 
 .play-dragon-canvas {
-  background: linear-gradient(180deg, #5ea5d6, #2b6cb0);
+  background: linear-gradient(180deg, var(--play-dragon-river-start), var(--play-dragon-river-end));
 }
 
 .play-dragon-ui,
@@ -279,8 +311,8 @@
 .play-shooter-lives {
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(6, 16, 30, 0.42);
-  color: #ffffff;
+  background: var(--play-status-bg);
+  color: var(--play-status-text);
   font-weight: 700;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
@@ -416,7 +448,7 @@
   z-index: 2;
   transform: translateX(-50%);
   letter-spacing: 4px;
-  color: #ff6b81;
+  color: var(--play-shooter-life-text);
 }
 
 .play-shooter-life-lost {
@@ -424,14 +456,14 @@
 }
 
 .play-shooter-panel {
-  background: #e3e8e3;
+  background: var(--play-shooter-panel-bg);
   border-color: rgba(36, 39, 56, 0.14);
 }
 
 .play-shooter-panel .play-mini-game-title,
 .play-shooter-panel .play-mini-game-text,
 .play-shooter-panel .play-mini-game-label {
-  color: #242738;
+  color: var(--play-shooter-option-text);
 }
 
 .play-shooter-options {
@@ -441,8 +473,8 @@
   align-items: center;
   padding: var(--space-4);
   background:
-    linear-gradient(180deg, rgba(247, 240, 226, 0.96), rgba(232, 221, 199, 0.94));
-  border: 1px solid rgba(109, 67, 36, 0.16);
+    linear-gradient(180deg, var(--play-shooter-option-surface), var(--play-shooter-option-surface-strong));
+  border: 1px solid var(--play-shooter-option-border);
   border-radius: 18px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
@@ -513,12 +545,12 @@
 }
 
 .play-shooter-start-button {
-  background: var(--color-accent);
-  color: var(--color-surface);
+  background: linear-gradient(180deg, var(--play-button-start-bg), var(--play-button-start-bg-strong));
+  color: var(--play-card-button-text);
 }
 
 .play-shooter-canvas {
-  background: #242738;
+  background: var(--play-shooter-stage-bg);
 }
 
 .play-shooter-modal {
@@ -535,9 +567,9 @@
 .play-shooter-dialog {
   min-width: min(420px, calc(100vw - 32px));
   padding: 22px 24px;
-  color: var(--color-surface);
+  color: var(--play-status-text);
   text-align: center;
-  background: linear-gradient(180deg, rgba(34, 49, 63, 0.96), rgba(47, 93, 98, 0.96));
+  background: linear-gradient(180deg, var(--play-shooter-modal-start), var(--play-shooter-modal-end));
   border: 1px solid rgba(216, 204, 181, 0.28);
   border-radius: 18px;
   box-shadow:
