@@ -59,6 +59,8 @@
 - `src/components/SolarTermCard.js`：节气卡片自定义元素 `tc-solar-term-card`。
 - `src/pages/home/index.js`：首页页面级自定义元素 `tc-home-page`。
 - `src/pages/home/components/DivinationSection.js`：首页占卜区自定义元素 `tc-divination-section` 与哈希取模逻辑。
+- `src/pages/home/components/ReadingCorner.js`：首页闲读角自定义元素 `tc-reading-corner`，支持拖拽飞出切换下一张卡片。
+- `src/pages/home/constants/readingNotes.js`：首页闲读角静态卡片数据。
 - `src/pages/play/index.js`：示例小游戏页面级自定义元素 `tc-play-page`。
 - `src/pages/play/components/BoatDragonGame.js`：赛龙舟小游戏自定义元素 `tc-boat-dragon-game`，负责航道切换、碰撞判定与暂停/结算状态。
 - `src/pages/play/components/DanmakuShooterGame.js`：弹幕射击小游戏自定义元素 `tc-danmaku-shooter-game`，负责难度、玩法模式、掉落物与暂停/结算状态。
@@ -431,21 +433,13 @@
 - 验证：待执行（建议本地刷新 `#/play`，确认两个小游戏绘制表现与暂停/结算流程正常）。
 - 风险与待办：
 	- `play.css` 中仍保留一部分页面级视觉 token 与装饰渐变值；这些值已集中在页面样式层，但若后续要做更严格的主题体系，还可再提升到共享主题变量。
-
-### 2026-04-24 / Copilot
-- 目标：新增登录页与路由守卫，并在顶栏展示登录用户名；新增全站页尾组件。
+### 2026-04-24 / Codex
+- 目标：为首页“闲读角”增加拖拽飞出切换交互，被拖出的卡片离场后自动显示下一张。
 - 修改文件：
-	- `src/services/authService.js`（新增）
-	- `src/pages/login/index.js`（新增）
-	- `src/components/SiteFooter.js`（新增）
-	- `src/styles/pages/login.css`（新增）
-	- `src/styles/components/site-footer.css`（新增）
-	- `src/pages/pageRegistry.js`
-	- `src/main.js`
-	- `src/components/TopBar.js`
-	- `src/styles/components/top-bar.css`
-	- `index.html`
-	- `AGENTS.md`
-- 验证：已执行路径残留检索与文件级错误检查，相关文件无语法报错。
+	- `src/pages/home/index.js`
+	- `src/pages/home/components/ReadingCorner.js`（新增）
+	- `src/pages/home/constants/readingNotes.js`（新增）
+	- `src/styles/pages/home.css`
+- 验证：待执行（建议本地在首页拖拽闲读角顶部卡片，确认超过阈值后卡片飞出并切换到下一张，未超过阈值时回弹）。
 - 风险与待办：
-	- 页尾中的 GitHub 链接与版权文案为占位值，需按你的仓库与版权信息替换。
+	- 当前交互以指针拖拽为主，若后续需要更强无障碍支持，可继续补键盘切换逻辑。
