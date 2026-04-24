@@ -58,9 +58,6 @@ class TcSeasonTermsBoard extends HTMLElement {
         const mp4Src = flvSrc.replace(/\.mp4$/i, ".mp4");
 
         mediaSection.innerHTML = `
-            <div class="terms-season-media-head">
-                <p class="terms-season-media-title">${this.currentSeason}季影像</p>
-            </div>
             <div class="terms-season-media-wrap">
                 <video class="terms-season-video" muted autoplay loop playsinline preload="metadata" aria-label="${this.currentSeason}季节气影像">
                     <source src="${mp4Src}" type="video/mp4">

@@ -90,11 +90,6 @@
   gap: 10px;
 }
 
-.terms-season-media-title {
-  color: var(--color-primary);
-  font-weight: 700;
-}
-
 .terms-season-media-wrap {
   position: relative;
   width: 100%;

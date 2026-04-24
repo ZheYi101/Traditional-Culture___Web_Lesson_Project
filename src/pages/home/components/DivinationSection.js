@@ -3,6 +3,7 @@ import "../../../components/ResultBadge.js";
 import { getDailyFortuneResult } from "../../../services/divinationService.js";
 
 function renderResultHtml(result) {
+
   return `
     <div class="daily-fortune-head">
       <div>
