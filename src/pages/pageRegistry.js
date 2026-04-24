@@ -1,3 +1,4 @@
+import { aboutPageTag } from "./about/index.js";
 import { advisorPageTag } from "./advisor/index.js";
 import { fortunePageTag, initFortunePage } from "./fortune/index.js";
 import { homePageTag } from "./home/index.js";
@@ -8,6 +9,9 @@ import { playPageTag } from "./play/index.js";
 export const pageRegistry = {
   login: {
     pageTag: loginPageTag
+  },
+  about: {
+    pageTag: aboutPageTag
   },
   home: {
     pageTag: homePageTag

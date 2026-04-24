@@ -5,7 +5,8 @@ const PAGE_SWITCH_ITEMS = [
   { id: "terms", label: "二十四节气" },
   { id: "fortune", label: "算命" },
   { id: "play", label: "小游戏" },
-  { id: "advisor", label: "出行问策" }
+  { id: "advisor", label: "出行问策" },
+  { id: "about", label: "关于" },
 ];
 
 class TcTopBar extends HTMLElement {
