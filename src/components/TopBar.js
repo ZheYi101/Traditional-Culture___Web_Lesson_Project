@@ -10,7 +10,7 @@ const PAGE_SWITCH_ITEMS = [
 
 class TcTopBar extends HTMLElement {
   static get observedAttributes() {
-    return ["current-page"];
+    return ["current-page", "current-user"];
   }
 
   connectedCallback() {
@@ -23,6 +23,7 @@ class TcTopBar extends HTMLElement {
 
   render() {
     const currentPage = this.getAttribute("current-page") || "home";
+    const currentUser = this.getAttribute("current-user") || "游客";
 
     const wrapper = document.createElement("div");
     wrapper.className = "top-bar";
@@ -48,6 +49,12 @@ class TcTopBar extends HTMLElement {
 
     const theme = document.createElement("div");
     theme.className = "top-bar-theme";
+    const user = document.createElement("span");
+    user.className = "top-bar-user";
+    user.title = currentUser;
+    user.textContent = `用户：${currentUser}`;
+
+    theme.append(user);
     theme.append(document.createElement("tc-theme-switcher"));
 
     wrapper.append(nav, theme);

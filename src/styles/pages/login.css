@@ -1,0 +1,77 @@
+.login-shell {
+  display: grid;
+  place-items: center;
+  min-height: 62vh;
+}
+
+.login-card {
+  width: min(460px, 100%);
+  padding: var(--space-4);
+  margin: 20vh;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  background:
+    linear-gradient(
+      140deg,
+      color-mix(in srgb, var(--color-surface) 96%, transparent),
+      color-mix(in srgb, var(--color-bg-alt) 28%, var(--color-surface))
+    );
+  box-shadow: var(--shadow-soft);
+}
+
+.login-kicker {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.login-title {
+  margin-top: 8px;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  color: var(--color-primary);
+}
+
+.login-desc {
+  margin-top: 10px;
+  color: var(--color-text-muted);
+}
+
+.login-form {
+  margin-top: var(--space-3);
+  display: grid;
+  gap: 12px;
+}
+
+.login-field {
+  display: grid;
+  gap: 6px;
+}
+
+.login-field span {
+  color: var(--color-text-muted);
+}
+
+.login-field input {
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--color-border) 82%, transparent);
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-surface) 95%, transparent);
+}
+
+.login-submit {
+  min-height: 42px;
+  border: 1px solid color-mix(in srgb, var(--color-primary) 54%, var(--color-border));
+  border-radius: var(--radius-sm);
+  color: var(--color-surface);
+  background: var(--color-primary);
+  font-weight: 700;
+}
+
+.login-tip {
+  margin-top: 12px;
+  color: var(--color-text-muted);
+}
+
+.login-tip.is-error {
+  color: #bf3d3d;
+}

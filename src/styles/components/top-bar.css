@@ -87,9 +87,19 @@
 .top-bar-theme {
   display: flex;
   align-items: center;
+  gap: 8px;
   padding: 4px 6px;
   border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+}
+
+.top-bar-user {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
 }
 
 @media (max-width: 720px) {
@@ -114,5 +124,9 @@
   .top-bar-theme {
     margin-left: auto;
     flex-shrink: 0;
+  }
+
+  .top-bar-user {
+    max-width: 92px;
   }
 }

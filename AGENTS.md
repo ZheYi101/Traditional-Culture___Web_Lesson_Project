@@ -90,6 +90,11 @@
 - `src/styles/pages/home-divination.css`：首页占卜区样式。
 - `src/styles/pages/play.css`：小游戏示例页样式。
 - `src/styles/pages/advisor.css`：出行问策页面样式。
+- `src/pages/login/index.js`：登录页自定义元素 `tc-login-page`，负责用户名 + API Key 登录。
+- `src/services/authService.js`：登录态、本地用户名与 API Key 校验服务。
+- `src/components/SiteFooter.js`：全站页尾自定义元素 `tc-site-footer`。
+- `src/styles/pages/login.css`：登录页样式。
+- `src/styles/components/site-footer.css`：全站页尾组件样式。
 - `server/cmd/server/main.go`：Go 服务端入口，注册静态文件服务与出行问策 API。
 - `server/internal/travelagent/types.go`：出行问策请求、上下文与流式事件结构。
 - `server/internal/travelagent/context.go`：天气、黄历和风险规则上下文构建。
@@ -426,3 +431,21 @@
 - 验证：待执行（建议本地刷新 `#/play`，确认两个小游戏绘制表现与暂停/结算流程正常）。
 - 风险与待办：
 	- `play.css` 中仍保留一部分页面级视觉 token 与装饰渐变值；这些值已集中在页面样式层，但若后续要做更严格的主题体系，还可再提升到共享主题变量。
+
+### 2026-04-24 / Copilot
+- 目标：新增登录页与路由守卫，并在顶栏展示登录用户名；新增全站页尾组件。
+- 修改文件：
+	- `src/services/authService.js`（新增）
+	- `src/pages/login/index.js`（新增）
+	- `src/components/SiteFooter.js`（新增）
+	- `src/styles/pages/login.css`（新增）
+	- `src/styles/components/site-footer.css`（新增）
+	- `src/pages/pageRegistry.js`
+	- `src/main.js`
+	- `src/components/TopBar.js`
+	- `src/styles/components/top-bar.css`
+	- `index.html`
+	- `AGENTS.md`
+- 验证：已执行路径残留检索与文件级错误检查，相关文件无语法报错。
+- 风险与待办：
+	- 页尾中的 GitHub 链接与版权文案为占位值，需按你的仓库与版权信息替换。
